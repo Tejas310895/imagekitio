@@ -37,7 +37,6 @@ if (isset($_POST["submit"])) {
     // Check if image file is a actual image or fake image
     $check = $_FILES["fileToUpload"]["tmp_name"];
     if (!empty($check)) {
-        echo "File is an image - " . $check["mime"] . ".";
         move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
         $uploadFile = $imageKit->uploadFile([
             "file" => "https://" . $_SERVER['SERVER_NAME'] . "/" . $target_file,
@@ -45,17 +44,16 @@ if (isset($_POST["submit"])) {
         ]);
         $uploadOk = 1;
         unlink($target_file);
-        echo ("Upload URL" . json_encode($uploadFile));
+        // echo ("Upload URL" . json_encode($uploadFile));
+        $jsonData = (array) $uploadFile;
+        $status_ar = (array) $jsonData['responseMetadata'];
+        $status_code =  $status_ar['statusCode'];
+        if ($status_code  == 200) {
+            echo "file uploaded to imagekit successfully";
+        } else {
+            echo "image upload failed";
+        }
     } else {
         $uploadOk = 0;
     }
-
-    // Upload Image - URL
-    // $uploadFile = $imageKit->uploadFile([
-    //     "file" => $_FILES["fileToUpload"]["tmp_name"],
-    //     "fileName" => "my_file_name.jpg"
-    // ]);
-
-    echo ('<br>');
-    // echo ("Upload URL" . json_encode($uploadFile));
 }
