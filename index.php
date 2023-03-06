@@ -41,7 +41,7 @@ if (isset($_POST["submit"])) {
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    echo "https://" . $_SERVER['SERVER_NAME'] . "/imagekitio/" . $target_file;
+    echo "https://" . $_SERVER['SERVER_NAME'] . $target_file;
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if ($check !== false) {
