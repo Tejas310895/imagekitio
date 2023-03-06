@@ -47,9 +47,12 @@ if (isset($_POST["submit"])) {
         // echo ("Upload URL" . json_encode($uploadFile));
         $jsonData = (array) $uploadFile;
         $status_ar = (array) $jsonData['responseMetadata'];
+        $raw_ar = (array) $status_ar['raw'];
         $status_code =  $status_ar['statusCode'];
+        $file_name = $raw_ar['name'];
         if ($status_code  == 200) {
             echo "file uploaded to imagekit successfully";
+            echo '<img src="https://ik.imagekit.io/wrnear2017/tr:n-ik_ml_thumbnail/' . $file_name . '" alt="">';
         } else {
             echo "image upload failed";
         }
