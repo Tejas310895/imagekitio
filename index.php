@@ -48,7 +48,7 @@ if (isset($_POST["submit"])) {
         echo "File is an image - " . $check["mime"] . ".";
         move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
         $uploadFile = $imageKit->uploadFile([
-            "file" => "https://" . $_SERVER['SERVER_NAME'] . "/imagekitio/" . $target_file,
+            "file" => "https://" . $_SERVER['SERVER_NAME'] . "/" . $target_file,
             "fileName" => "my_file_name.jpg"
         ]);
         $uploadOk = 1;
