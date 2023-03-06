@@ -27,7 +27,7 @@ use ImageKit\ImageKit;
 
 $public_key = "public_w50/3waN1vN9TNAg1U1C/ahR6Ko=";
 $your_private_key = "private_yMtf8/TQs6h+MVhMOSi+lyreJMU=";
-$url_end_point = "https://" . $_SERVER['SERVER_HOST'] . "/imagekitio/";
+$url_end_point = "https://" . $_SERVER['SERVER_NAME'] . "/imagekitio/";
 
 $imageKit = new ImageKit(
     $public_key,
@@ -41,8 +41,6 @@ if (isset($_POST["submit"])) {
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    echo $target_file;
-    echo "Hello";
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if ($check !== false) {
