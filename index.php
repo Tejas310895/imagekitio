@@ -20,7 +20,7 @@ use ImageKit\ImageKit;
 
 $public_key = "public_w50/3waN1vN9TNAg1U1C/ahR6Ko=";
 $your_private_key = "private_yMtf8/TQs6h+MVhMOSi+lyreJMU=";
-$url_end_point = "http://localhost/imagekitio/";
+$url_end_point = "https://" . $_SERVER['SERVER_HOST'] . "/imagekitio/";
 
 $imageKit = new ImageKit(
     $public_key,
