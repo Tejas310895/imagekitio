@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
             "fileName" => "my_file_name.jpg"
         ]);
         $uploadOk = 1;
-        // unlink($target_file);
+        unlink($target_file);
     } else {
         echo "File is not an image.";
         $uploadOk = 0;
