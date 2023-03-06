@@ -1,10 +1,3 @@
-<?php
-
-error_reporting(E_ALL);
-error_reporting(-1);
-ini_set('error_reporting', E_ALL);
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -43,8 +36,8 @@ if (isset($_POST["submit"])) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     echo "https://" . $_SERVER['SERVER_NAME'] . "/" . $target_file;
     // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if ($check !== false) {
+    $check = $_FILES["fileToUpload"]["tmp_name"];
+    if (!empty($check)) {
         echo "File is an image - " . $check["mime"] . ".";
         move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
         $uploadFile = $imageKit->uploadFile([
@@ -53,6 +46,7 @@ if (isset($_POST["submit"])) {
         ]);
         $uploadOk = 1;
         unlink($target_file);
+        print_r(serialize($uploadFile));
     } else {
         echo "File is not an image.";
         $uploadOk = 0;
@@ -64,7 +58,6 @@ if (isset($_POST["submit"])) {
     //     "fileName" => "my_file_name.jpg"
     // ]);
 
-    print_r(serialize($uploadFile));
     echo ('<br>');
     // echo ("Upload URL" . json_encode($uploadFile));
 }
