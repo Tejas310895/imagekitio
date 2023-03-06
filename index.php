@@ -34,14 +34,14 @@ if (isset($_POST["submit"])) {
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
+    echo $target_file;
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if ($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
         $uploadFile = $imageKit->uploadFile([
-            "file" => "uploads\addhar.jpeg",
+            "file" => $target_file,
             "fileName" => "my_file_name.jpg"
         ]);
         $uploadOk = 1;
